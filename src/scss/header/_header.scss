@@ -1,0 +1,63 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.header {
+    padding: 5rem 0;
+    position: relative;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    @include m.phone{
+        padding: 3rem;
+    }
+    @include m.tablet { 
+        min-height: 70rem;
+    }
+    @include m.desktop{
+        padding: 2.4rem;
+    }
+        &::before{
+            content: '';
+            background-color: v.$black;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.5;
+        }
+    .content-header{
+        position: relative;
+        h1 {
+            text-align: center;
+            color: v.$white;
+            text-transform: uppercase;
+            margin-top: 4rem;
+            @include m.tablet { 
+                margin-top: 9rem;
+            }
+        }
+    }
+}
+
+
+
+.header-begin{
+    background-image: url(/src/img/header_inicio.jpg);
+}
+
+.header-about {
+    background-image: url(/src/img/header_nosotros.jpg);
+}
+.header-process {
+    background-image: url(/src/img/header_proceso.jpg);
+}
+.header-menu {
+    background-image: url(/src/img/header_menu.jpg);
+}
+.header-gallery {
+    background-image: url(/src/img/header_galeria.jpg);
+}
+.header-contact {
+    background-image: url(/src/img/header_contacto.jpg);
+}

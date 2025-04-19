@@ -1,0 +1,11 @@
+node_modules/
+build/
+dist/
+.vscode/
+.DS_Store
+.env
+
+# Archivos del sistema
+*.log
+*.tmp
+*.bak
