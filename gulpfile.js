@@ -17,9 +17,15 @@ function dev() {
   watch('src/scss/**/*.scss', css);
 }
 
+function html() {
+  return src('index.html') // desde la raíz
+    .pipe(dest('build'));  // lo copia a /build
+}
+
+
 // Exporta la tarea css para que pueda ser utilizada desde la línea de comandos
 // y la tarea dev para el modo de desarrollo
-exports.build = series(css); // Compila solo una vez y termina
+exports.build = series(css, html); // Compila solo una vez y termina
 
 exports.css = css;
 exports.dev = dev;
