@@ -1,22 +1,25 @@
-const { src, dest, watch } = require('gulp');
+const { src, dest, watch, series } = require('gulp');
 const sass = require('gulp-sass')(require('sass'));
+const sourcemaps = require('gulp-sourcemaps');
 const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
-const sourcemaps = require('gulp-sourcemaps');
 
-function css(done) {
-  src('src/scss/app.scss')        // Ruta al archivo SCSS principal
-    .pipe(sourcemaps.init())          // Inicializa sourcemaps
-    .pipe(sass().on('error', sass.logError)) // Compilar SCSS
-    .pipe(postcss([autoprefixer()]))         // Agrega autoprefixer
-    .pipe(sourcemaps.write('.'))          // Escribe sourcemaps
-    .pipe(dest('build/css'));     // Guarda como app.css aquí
-    done();
+function css() {
+  return src('src/scss/app.scss')
+    .pipe(sourcemaps.init())
+    .pipe(sass().on('error', sass.logError))
+    .pipe(postcss([autoprefixer()]))
+    .pipe(sourcemaps.write('.'))
+    .pipe(dest('build/css'));
 }
 
 function dev() {
-  watch('src/scss/**/*.scss', css); // Observa todos los .scss
+  watch('src/scss/**/*.scss', css);
 }
+
+// Exporta la tarea css para que pueda ser utilizada desde la línea de comandos
+// y la tarea dev para el modo de desarrollo
+exports.build = series(css); // Compila solo una vez y termina
 
 exports.css = css;
 exports.dev = dev;
